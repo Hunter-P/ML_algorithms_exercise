@@ -19,11 +19,11 @@ class Perceptron:
         for _ in range(epoch):
             y_pred = self.predict(x)
             _err = (y_pred != y)*sample_weight
-            # 随机梯度下降
+            # 选出分类误差最大的样本点
             _indices = np.random.permutation(len(y))
             _idx = _indices[np.argmax(_err[_indices])]
             # 若没有被误分类的样本点则完成了训练
-            if y_pred == y:
+            if y_pred[_idx] == y[_idx]:
                 return
             # 更新参数
             _delta = lr*y[_idx]*sample_weight[_idx]
